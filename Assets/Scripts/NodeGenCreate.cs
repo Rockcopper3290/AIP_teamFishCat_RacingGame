@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Node_Gen_Create : MonoBehaviour
+public class NodeGenCreate : MonoBehaviour
 {
     public GameObject node;
 
@@ -18,30 +18,27 @@ public class Node_Gen_Create : MonoBehaviour
         Vector3 mousePosInWorldCoords = Camera.main.ScreenToWorldPoint(mousePosInScreenCoords);
         mousePosInWorldCoords.z = 0.0f;
 
-        //GameObject tileInstance = GameObject.Instantiate(tile);
-        //tileInstance.transform.position = new Vector3(x + 0.5f, y + 0.5f);
-        //tileInstance.name = "Tile_" + x.ToString() + "_" + y.ToString();
-
         if (Input.GetKeyDown(KeyCode.S))
         {
             hasStartBeenPressed = true;
 
-            for (int x = 0; GameObject.Find("Node_" + x) != null; ++x)
+            for (int x = 0; GameObject.Find("Node" + x) != null; ++x)
             {
-                GameObject currentNode = GameObject.Find("Node_" + x);
-                GameObject nextNode = GameObject.Find("Node_" + (x + 1));
+                GameObject currentNode = GameObject.Find("Node" + x);
+                GameObject nextNode = GameObject.Find("Node" + (x + 1));
 
                 if (nextNode == null) currentNode.GetComponent<Node_Checkpoint>().isNodeLastPlaced = true;
             }
         }
 
-        if (!hasStartBeenPressed)
+        if (!hasStartBeenPressed)   // No longer accepts RMB input once the race starts
         {
             if (Input.GetMouseButtonDown(1)) // RMB
             {
                 GameObject nodeInstance = GameObject.Instantiate(node);
                 nodeInstance.transform.position = new Vector3(mousePosInWorldCoords.x, mousePosInWorldCoords.y);
-                nodeInstance.name = "Node_" + numberOfNodes.ToString();
+                nodeInstance.GetComponent<Node_Checkpoint>().nodePosition = new Vector3(mousePosInWorldCoords.x, mousePosInWorldCoords.y);
+                nodeInstance.name = "Node" + numberOfNodes.ToString();
 
                 if (numberOfNodes == 0) nodeInstance.GetComponent<Node_Checkpoint>().isNodeStart = true;
 
