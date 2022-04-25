@@ -28,6 +28,7 @@ public class Node_Gen_Create : MonoBehaviour
 
             for (int x = 0; GameObject.Find("Node_" + x) != null; ++x)
             {
+                
                 GameObject currentNode = GameObject.Find("Node_" + x);
                 GameObject nextNode = GameObject.Find("Node_" + (x + 1));
 

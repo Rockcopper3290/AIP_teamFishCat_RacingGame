@@ -5,7 +5,7 @@ using UnityEngine;
 public class Node_Gen_Set : MonoBehaviour
 {
     public GameObject node;
-
+    public Track_Drawing drawTrack;
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +35,12 @@ public class Node_Gen_Set : MonoBehaviour
                 nodeInstance.GetComponent<Node_Checkpoint>().isNodeLastPlaced = true;
             }
             nodeInstance.name = "Node_" + x.ToString();
+
+            drawTrack.addNewNodeToList(nodeInstance);
         }
+
+
+        drawTrack.initialiseTrackDrawing();
     }
 
     // Update is called once per frame
