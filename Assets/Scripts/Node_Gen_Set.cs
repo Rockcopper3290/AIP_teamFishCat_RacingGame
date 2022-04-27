@@ -5,7 +5,8 @@ using UnityEngine;
 public class Node_Gen_Set : MonoBehaviour
 {
     public GameObject node;
-    public Track_Drawing drawTrack;
+    //public Track_Drawing drawTrack;
+    public Track_Testing track_LR;
 
     // Start is called before the first frame update
     void Start()
@@ -36,11 +37,14 @@ public class Node_Gen_Set : MonoBehaviour
             }
             nodeInstance.name = "Node_" + x.ToString();
 
-            drawTrack.addNewNodeToList(nodeInstance);
+            //drawTrack.addNewNodeToList(nodeInstance);
+            track_LR.addNewNodeToList_trackTesting(nodeInstance);
+
         }
 
+        track_LR.fuckMe_lr();
 
-        drawTrack.initialiseTrackDrawing();
+        //drawTrack.initialiseTrackDrawing();
     }
 
     // Update is called once per frame

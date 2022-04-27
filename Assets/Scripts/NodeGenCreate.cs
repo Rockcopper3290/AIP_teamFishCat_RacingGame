@@ -24,14 +24,12 @@ public class NodeGenCreate : MonoBehaviour
 
             for (int x = 0; GameObject.Find("Node" + x) != null; ++x)
             {
-<<<<<<< HEAD:Assets/Scripts/Node_Gen_Create.cs
+
                 
                 GameObject currentNode = GameObject.Find("Node_" + x);
                 GameObject nextNode = GameObject.Find("Node_" + (x + 1));
-=======
-                GameObject currentNode = GameObject.Find("Node" + x);
-                GameObject nextNode = GameObject.Find("Node" + (x + 1));
->>>>>>> 1edf721d5f45f5d3005d598b0940b43af3e547ec:Assets/Scripts/NodeGenCreate.cs
+
+
 
                 if (nextNode == null) currentNode.GetComponent<Node_Checkpoint>().isNodeLastPlaced = true;
             }

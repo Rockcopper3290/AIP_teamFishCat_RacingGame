@@ -41,13 +41,6 @@ public class Track_Drawing : MonoBehaviour
     public void initialiseTrackDrawing()
     {
 
-
-
-
-            Debug.Log(trackNodeList.Count);
-
-
-
         //1) get 2 nodes from the list starting at the begining
         
         for (int nodeIndex = 0; nodeIndex < trackNodeList.Count; nodeIndex++)
