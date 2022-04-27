@@ -22,16 +22,15 @@ public class NodeGenCreate : MonoBehaviour
         {
             hasStartBeenPressed = true;
 
-            for (int x = 0; GameObject.Find("Node" + x) != null; ++x)
+            for (int x = 0; GameObject.Find("Node_" + x) != null; ++x)
             {
-
-                
                 GameObject currentNode = GameObject.Find("Node_" + x);
                 GameObject nextNode = GameObject.Find("Node_" + (x + 1));
 
-
-
-                if (nextNode == null) currentNode.GetComponent<Node_Checkpoint>().isNodeLastPlaced = true;
+                if (nextNode == null)
+                {
+                    currentNode.GetComponent<Node_Checkpoint>().isNodeLastPlaced = true;
+                }
             }
         }
 
@@ -42,7 +41,7 @@ public class NodeGenCreate : MonoBehaviour
                 GameObject nodeInstance = GameObject.Instantiate(node);
                 nodeInstance.transform.position = new Vector3(mousePosInWorldCoords.x, mousePosInWorldCoords.y);
                 nodeInstance.GetComponent<Node_Checkpoint>().nodePosition = new Vector3(mousePosInWorldCoords.x, mousePosInWorldCoords.y);
-                nodeInstance.name = "Node" + numberOfNodes.ToString();
+                nodeInstance.name = "Node_" + numberOfNodes.ToString();
 
                 if (numberOfNodes == 0) nodeInstance.GetComponent<Node_Checkpoint>().isNodeStart = true;
 

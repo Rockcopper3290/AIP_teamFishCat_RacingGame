@@ -45,7 +45,7 @@ public class NodeGenSet : MonoBehaviour
                 nodeInstance.GetComponent<Node_Checkpoint>().nodePosition = new Vector3(-1.0f, -4.5f);
                 nodeInstance.GetComponent<Node_Checkpoint>().isNodeLastPlaced = true;
             }
-            nodeInstance.name = "Node" + x.ToString();
+            nodeInstance.name = "Node_" + x.ToString();
         }
     }
 }
