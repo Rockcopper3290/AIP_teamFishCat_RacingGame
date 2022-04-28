@@ -27,10 +27,7 @@ public class NodeGenCreate : MonoBehaviour
                 GameObject currentNode = GameObject.Find("Node_" + x);
                 GameObject nextNode = GameObject.Find("Node_" + (x + 1));
 
-                if (nextNode == null)
-                {
-                    currentNode.GetComponent<Node_Checkpoint>().isNodeLastPlaced = true;
-                }
+                if (nextNode == null) currentNode.GetComponent<Node_Checkpoint>().isNodeLastPlaced = true;
             }
         }
 
