@@ -19,14 +19,14 @@ public class Track_Testing : MonoBehaviour
         pointsInAnArray = points.ToArray();
     }
 
-    private void Start(){
+    private void Start()
+    {
 
     }
 
     public void Update()
     {
         line.SetUpLine(pointsInAnArray);
-
     }
 
 }

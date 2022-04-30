@@ -7,19 +7,22 @@ public class Track_LineController : MonoBehaviour
     private LineRenderer lr;
     private Transform[] points;
 
-    private void Awake(){
+    private void Awake()
+    {
         lr = GetComponent<LineRenderer>();
     }
 
-    public void SetUpLine(Transform[] points){
+    public void SetUpLine(Transform[] points)
+    {
         lr.positionCount = points.Length;
         this.points = points;
     }
 
-    public void Update(){
-        for (int i = 0; i < points.Length; i++){
+    public void Update()
+    {
+        for (int i = 0; i < points.Length; ++i)
+        {
             lr.SetPosition(i, points[i].position);
-
         }
     }
 

@@ -42,7 +42,7 @@ public class NodeGenCreate : MonoBehaviour
             numberOfNodes = 0;
         }
 
-            if (!hasStartBeenPressed)   // No longer accepts RMB input once the race starts
+        if (!hasStartBeenPressed)   // No longer accepts RMB input once the race starts
         {
             if (Input.GetMouseButtonDown(1)) // RMB
             {
