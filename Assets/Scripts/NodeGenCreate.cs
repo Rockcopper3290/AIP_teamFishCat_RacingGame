@@ -18,7 +18,7 @@ public class NodeGenCreate : MonoBehaviour
         Vector3 mousePosInWorldCoords = Camera.main.ScreenToWorldPoint(mousePosInScreenCoords);
         mousePosInWorldCoords.z = 0.0f;
 
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.S))    // Disables node creation and will start/ spawn the cars to race
         {
             hasStartBeenPressed = true;
 
@@ -27,14 +27,22 @@ public class NodeGenCreate : MonoBehaviour
                 GameObject currentNode = GameObject.Find("Node_" + x);
                 GameObject nextNode = GameObject.Find("Node_" + (x + 1));
 
-                if (nextNode == null)
-                {
-                    currentNode.GetComponent<Node_Checkpoint>().isNodeLastPlaced = true;
-                }
+                if (nextNode == null) currentNode.GetComponent<Node_Checkpoint>().isNodeLastPlaced = true;
             }
         }
 
-        if (!hasStartBeenPressed)   // No longer accepts RMB input once the race starts
+        if (Input.GetKeyDown(KeyCode.C))    // Clears all of the check points and prepares for new creation of CPs
+        {
+            for (int x = 0; x < numberOfNodes; ++x)
+            {
+                Destroy(GameObject.Find("Node_" + x));
+            }
+
+            hasStartBeenPressed = false;
+            numberOfNodes = 0;
+        }
+
+            if (!hasStartBeenPressed)   // No longer accepts RMB input once the race starts
         {
             if (Input.GetMouseButtonDown(1)) // RMB
             {
