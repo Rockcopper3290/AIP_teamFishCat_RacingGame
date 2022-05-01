@@ -52,7 +52,7 @@ public class NodeGenSet : MonoBehaviour
             track_LR.addNewNodeToList_trackTesting(nodeInstance);
         }
 
-        track_LR.fuckMe_lr();
+        track_LR.endOfTrackSelection();
 
         //drawTrack.initialiseTrackDrawing();
     }

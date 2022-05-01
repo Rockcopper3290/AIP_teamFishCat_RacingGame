@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class NodeGenCreate : MonoBehaviour
 {
+    public Track_Testing track_LR;
+
     public GameObject node;
 
     public int numberOfNodes = 0;
 
     bool hasStartBeenPressed = false;
+    public bool isReadyToDrawTrack = false;
+
 
     // Update is called once per frame
     void Update()
@@ -28,18 +32,28 @@ public class NodeGenCreate : MonoBehaviour
                 GameObject nextNode = GameObject.Find("Node_" + (x + 1));
 
                 if (nextNode == null) currentNode.GetComponent<Node_Checkpoint>().isNodeLastPlaced = true;
+
             }
+            track_LR.endOfTrackSelection();
+
+            isReadyToDrawTrack = true;
         }
 
         if (Input.GetKeyDown(KeyCode.C))    // Clears all of the check points and prepares for new creation of CPs
         {
+            track_LR.clearTrackList();
+
             for (int x = 0; x < numberOfNodes; ++x)
             {
+                //track_LR.points.RemoveAt(x);
                 Destroy(GameObject.Find("Node_" + x));
             }
 
             hasStartBeenPressed = false;
             numberOfNodes = 0;
+            isReadyToDrawTrack = false;
+
+
         }
 
         if (!hasStartBeenPressed)   // No longer accepts RMB input once the race starts
@@ -54,6 +68,8 @@ public class NodeGenCreate : MonoBehaviour
                 if (numberOfNodes == 0) nodeInstance.GetComponent<Node_Checkpoint>().isNodeStart = true;
 
                 ++numberOfNodes;
+
+                track_LR.addNewNodeToList_trackTesting(nodeInstance);
             }
         }
     }

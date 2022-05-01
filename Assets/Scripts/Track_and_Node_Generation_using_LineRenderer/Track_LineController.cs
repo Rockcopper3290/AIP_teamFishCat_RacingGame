@@ -6,6 +6,7 @@ public class Track_LineController : MonoBehaviour
 {
     private LineRenderer lr;
     private Transform[] points;
+    public NodeGenCreate NodeGenCreate_Refence;
 
     private void Awake()
     {
@@ -20,10 +21,14 @@ public class Track_LineController : MonoBehaviour
 
     public void Update()
     {
-        for (int i = 0; i < points.Length; ++i)
+        if (NodeGenCreate_Refence.isReadyToDrawTrack == true)
         {
-            lr.SetPosition(i, points[i].position);
+            for (int i = 0; i < points.Length; ++i)
+            {
+                lr.SetPosition(i, points[i].position);
+            }
         }
+            
     }
 
 }
