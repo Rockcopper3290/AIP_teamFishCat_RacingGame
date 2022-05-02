@@ -5,6 +5,7 @@ using UnityEngine;
 public class NodeGenCreate : MonoBehaviour
 {
     public Track_Testing track_LR;
+    public GameObject lineRenderer;
 
     public GameObject node;
 
@@ -13,6 +14,12 @@ public class NodeGenCreate : MonoBehaviour
     bool hasStartBeenPressed = false;
     public bool isReadyToDrawTrack = false;
 
+    // Runs once at the first available frame
+    void Start()
+    {
+        lineRenderer.GetComponent<LineRenderer>().startColor = Color.clear;
+        lineRenderer.GetComponent<LineRenderer>().endColor = Color.clear;
+    }
 
     // Update is called once per frame
     void Update()
@@ -35,6 +42,8 @@ public class NodeGenCreate : MonoBehaviour
 
             }
             track_LR.endOfTrackSelection();
+            lineRenderer.GetComponent<LineRenderer>().startColor = Color.white;
+            lineRenderer.GetComponent<LineRenderer>().endColor = Color.white;
 
             isReadyToDrawTrack = true;
         }
@@ -53,7 +62,8 @@ public class NodeGenCreate : MonoBehaviour
             numberOfNodes = 0;
             isReadyToDrawTrack = false;
 
-
+            lineRenderer.GetComponent<LineRenderer>().startColor = Color.clear;
+            lineRenderer.GetComponent<LineRenderer>().endColor = Color.clear;
         }
 
         if (!hasStartBeenPressed)   // No longer accepts RMB input once the race starts

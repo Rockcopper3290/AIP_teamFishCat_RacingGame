@@ -439,6 +439,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   track_LR: {fileID: 10054442}
+  lineRenderer: {fileID: 194559929}
   node: {fileID: 5724619450357287062, guid: 846db6530a417204a86ec2a4ea0a2e3e, type: 3}
   numberOfNodes: 0
   isReadyToDrawTrack: 0
