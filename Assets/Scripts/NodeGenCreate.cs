@@ -11,7 +11,7 @@ public class NodeGenCreate : MonoBehaviour
 
     public int numberOfNodes = 0;
 
-    bool hasStartBeenPressed = false;
+    public bool hasStartBeenPressed = false;
     public bool isReadyToDrawTrack = false;
 
     // Runs once at the first available frame
