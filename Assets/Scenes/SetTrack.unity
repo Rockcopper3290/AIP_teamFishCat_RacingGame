@@ -326,6 +326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01d58f7a84dff1a428456b8838b5b809, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NodeGenCreate_Refence: {fileID: 0}
 --- !u!120 &1361119989
 LineRenderer:
   m_ObjectHideFlags: 0
