@@ -8,6 +8,7 @@ public class NodeGenCreate : MonoBehaviour
     public GameObject lineRenderer;
 
     public GameObject node;
+    public GameObject fishCatAI;
 
     public int numberOfNodes = 0;
 
@@ -33,14 +34,21 @@ public class NodeGenCreate : MonoBehaviour
         {
             hasStartBeenPressed = true;
 
-            for (int x = 0; GameObject.Find("Node_" + x) != null; ++x)
+            for (int x = 0; GameObject.Find("Node_" + x) != null; ++x)  // Finds the last checkpoint and labels it as last for some reason :)
             {
                 GameObject currentNode = GameObject.Find("Node_" + x);
                 GameObject nextNode = GameObject.Find("Node_" + (x + 1));
 
                 if (nextNode == null) currentNode.GetComponent<Node_Checkpoint>().isNodeLastPlaced = true;
-
             }
+
+            // Creates a tester AI upon S being pressed {
+            GameObject fishCat = GameObject.Instantiate(fishCatAI);
+            GameObject startCP = GameObject.Find("Node_0");
+            fishCat.transform.position = startCP.GetComponent<Node_Checkpoint>().nodePosition;
+            fishCat.name = "Fish Cat 01";
+            // }
+
             track_LR.endOfTrackSelection();
             lineRenderer.GetComponent<LineRenderer>().startColor = Color.white;
             lineRenderer.GetComponent<LineRenderer>().endColor = Color.white;
@@ -57,6 +65,8 @@ public class NodeGenCreate : MonoBehaviour
                 //track_LR.points.RemoveAt(x);
                 Destroy(GameObject.Find("Node_" + x));
             }
+
+            Destroy(GameObject.Find("Fish Cat 01")); // DESTROYS the single AI fish cat upon C pressed
 
             hasStartBeenPressed = false;
             numberOfNodes = 0;
