@@ -43,6 +43,15 @@ public class FishCat_Player : MonoBehaviour
             vectorToNextCP = nextCP.GetComponent<Node_Checkpoint>().nodePosition - transform.position;
             // DELETE THIS LATER, ONCE THE CARS GET INSTANTIATED } 
 
+        if (Input.GetMouseButton(0))    // LMB held down
+        {
+            if (playerSpeed < 1.2f) playerSpeed += 0.01f;
+        }
+        if (!Input.GetMouseButton(0))    // LMB released
+        {
+            if (playerSpeed > 0.5f) playerSpeed -= 0.01f;
+        }
+
 
         playerVelocity.Normalize();
         playerVelocity *= playerSpeed;
@@ -81,7 +90,7 @@ public class FishCat_Player : MonoBehaviour
         
 
         
-            playerSpeed = 0.2f; // DELETE THIS LATER, ONCE THE CARS GET INSTANTIATED {
+            // playerSpeed = 0.2f; // DELETE THIS LATER, ONCE THE CARS GET INSTANTIATED {
         } // }
     }
 

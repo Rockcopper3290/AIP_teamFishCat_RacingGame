@@ -50,8 +50,8 @@ public class NodeGenCreate : MonoBehaviour
             // }
 
             track_LR.endOfTrackSelection();
-            lineRenderer.GetComponent<LineRenderer>().startColor = Color.white;
-            lineRenderer.GetComponent<LineRenderer>().endColor = Color.white;
+            lineRenderer.GetComponent<LineRenderer>().startColor = Color.cyan;
+            lineRenderer.GetComponent<LineRenderer>().endColor = Color.cyan;
 
             isReadyToDrawTrack = true;
         }
@@ -85,7 +85,11 @@ public class NodeGenCreate : MonoBehaviour
                 nodeInstance.GetComponent<Node_Checkpoint>().nodePosition = new Vector3(mousePosInWorldCoords.x, mousePosInWorldCoords.y);
                 nodeInstance.name = "Node_" + numberOfNodes.ToString();
 
-                if (numberOfNodes == 0) nodeInstance.GetComponent<Node_Checkpoint>().isNodeStart = true;
+                if (numberOfNodes == 0)
+                {
+                    nodeInstance.GetComponent<Node_Checkpoint>().isNodeStart = true;
+                    nodeInstance.GetComponent<SpriteRenderer>().color = Color.black;
+                }
 
                 ++numberOfNodes;
 
