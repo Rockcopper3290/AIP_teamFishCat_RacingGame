@@ -14,35 +14,35 @@ public class FishCat_Player : MonoBehaviour
     public int nodeCounter = 1;
     public float playerTurnSpeed = 180.0f;
     public float playerSpeed = 1.0f;
-
-    bool sWasPressed = false;
+    bool onTrackSpeedBoost = false;
 
     Rigidbody2D playerRigidBody;
     public GameObject nextCP;
 
-    // Update is called on the first frame ----- CHANGE TO AWAKE OR SOMETHING ONC THE CARS GET INSTANTIATED
-    void Start()
+    // Update is called on the first frame after instantiated
+    void Awake()
     {
         playerRigidBody = GetComponent<Rigidbody2D>();
         vectorLeftAngle = playerAngle + 90.0f;
 
         AngleToVectorMovement();
+
+        nextCP = GameObject.Find("Node_" + nodeCounter);
     }
 
     // Update is called once per frame
     void Update()
     {
-        // DELETE THIS LATER, ONCE THE CARS GET INSTANTIATED {
-        if (Input.GetKeyDown(KeyCode.S))
+        if (!Input.GetMouseButton(0))    // LMB released
         {
-            sWasPressed = true; 
-            nextCP = GameObject.Find("Node_" + nodeCounter);
+            if (playerSpeed > 0.5f) playerSpeed -= 0.01f;
         }
-        if (sWasPressed) 
+        else if (Input.GetMouseButton(0))    // LMB held down
         {
-            vectorToNextCP = nextCP.GetComponent<Node_Checkpoint>().nodePosition - transform.position;
-            // DELETE THIS LATER, ONCE THE CARS GET INSTANTIATED } 
+            if (playerSpeed < 1.2f) playerSpeed += 0.01f;
+        }
 
+        if (onTrackSpeedBoost) playerSpeed = 1.5f;
 
         playerVelocity.Normalize();
         playerVelocity *= playerSpeed;
@@ -50,16 +50,17 @@ public class FishCat_Player : MonoBehaviour
         playerRigidBody.rotation = playerAngle;
 
         // Calculates whether to turn left or right
+        vectorToNextCP = nextCP.GetComponent<Node_Checkpoint>().nodePosition - transform.position;
         angleToNode = Vector3.Angle(vectorLeft, vectorToNextCP);
 
         if (angleToNode <= 90)  // Turns left
-            {
+        {
             playerAngle += playerTurnSpeed * Time.deltaTime;
             vectorLeftAngle = playerAngle + 90.0f;
             AngleToVectorMovement();
         }
         else if (angleToNode > 90)  // Turns right
-            {
+        {
             playerAngle -= playerTurnSpeed * Time.deltaTime;
             vectorLeftAngle = playerAngle + 90.0f;
             AngleToVectorMovement();
@@ -78,11 +79,6 @@ public class FishCat_Player : MonoBehaviour
                 nextCP = GameObject.Find("Node_0");
             }
         }
-        
-
-        
-            playerSpeed = 0.2f; // DELETE THIS LATER, ONCE THE CARS GET INSTANTIATED {
-        } // }
     }
 
     // Takes fishCatAngle and turns it into a vector/ velocity for movement
@@ -93,5 +89,15 @@ public class FishCat_Player : MonoBehaviour
         playerVelocity = new Vector3(Mathf.Cos(playerAngle * Mathf.Deg2Rad), Mathf.Sin(playerAngle * Mathf.Deg2Rad));
 
         vectorLeft = new Vector3(Mathf.Cos(vectorLeftAngle * Mathf.Deg2Rad), Mathf.Sin(vectorLeftAngle * Mathf.Deg2Rad));
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        onTrackSpeedBoost = true;
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        onTrackSpeedBoost = false;
     }
 }
