@@ -14,7 +14,7 @@ public class FishCat_Player : MonoBehaviour
     public int nodeCounter = 1;
     public float playerTurnSpeed = 180.0f;
     public float playerSpeed = 1.0f;
-
+    bool onTrackSpeedBoost = false;
     bool sWasPressed = false;
 
     Rigidbody2D playerRigidBody;
@@ -43,15 +43,17 @@ public class FishCat_Player : MonoBehaviour
             vectorToNextCP = nextCP.GetComponent<Node_Checkpoint>().nodePosition - transform.position;
             // DELETE THIS LATER, ONCE THE CARS GET INSTANTIATED } 
 
-        if (Input.GetMouseButton(0))    // LMB held down
-        {
-            if (playerSpeed < 1.2f) playerSpeed += 0.01f;
-        }
+
         if (!Input.GetMouseButton(0))    // LMB released
         {
             if (playerSpeed > 0.5f) playerSpeed -= 0.01f;
         }
+        else if (Input.GetMouseButton(0))    // LMB held down
+        {
+            if (playerSpeed < 1.2f) playerSpeed += 0.01f;
+        }
 
+        if (onTrackSpeedBoost) playerSpeed = 1.5f;
 
         playerVelocity.Normalize();
         playerVelocity *= playerSpeed;
@@ -102,5 +104,15 @@ public class FishCat_Player : MonoBehaviour
         playerVelocity = new Vector3(Mathf.Cos(playerAngle * Mathf.Deg2Rad), Mathf.Sin(playerAngle * Mathf.Deg2Rad));
 
         vectorLeft = new Vector3(Mathf.Cos(vectorLeftAngle * Mathf.Deg2Rad), Mathf.Sin(vectorLeftAngle * Mathf.Deg2Rad));
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        onTrackSpeedBoost = true;
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        onTrackSpeedBoost = false;
     }
 }
