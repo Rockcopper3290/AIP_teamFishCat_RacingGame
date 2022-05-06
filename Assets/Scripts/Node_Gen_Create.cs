@@ -13,7 +13,9 @@ public class Node_Gen_Create : MonoBehaviour
 
     Vector3 vectorFrom0To1;
     Vector3 vectorSpawnPoint;
+    Vector3 vectorIncremet;
 
+    float fishCatSpawnAngle;
     public int numberOfNodes = 0;
     public int numberOfFishCats = 5;
 
@@ -47,29 +49,30 @@ public class Node_Gen_Create : MonoBehaviour
                 if (nextNode == null) currentNode.GetComponent<Node_Checkpoint>().isNodeLastPlaced = true;
             }
 
-            // Spawns the players car and a number of AI behind
+            // Spawns the players car and a number of AI behind near the first CP 
             GameObject firstCP = GameObject.Find("Node_0");
             GameObject nextCP = GameObject.Find("Node_1");
+            transform.position = firstCP.transform.position;
             vectorFrom0To1 = nextCP.transform.position - firstCP.transform.position;
-            vectorFrom0To1.Normalize();
-            vectorFrom0To1 *= -0.5f;
-            vectorSpawnPoint = firstCP.transform.position + vectorFrom0To1;
+            fishCatSpawnAngle = Vector3.Angle(vectorFrom0To1, Vector3.right);
 
             for (int i = 1; i < numberOfFishCats + 1; ++i)
             {
                 if (i > 1)
                 {
-                    vectorSpawnPoint = vectorFrom0To1;
-                    vectorSpawnPoint *= i;
+                    SetAngleForFishCatSpawn();  // I know this makes it add the 90deg each run through, but that also helps with placing
+                    vectorIncremet = vectorIncremet + vectorSpawnPoint;
                     GameObject fishCat = GameObject.Instantiate(fishCatAI);
-                    fishCat.transform.position = vectorSpawnPoint;
+                    fishCat.transform.position = firstCP.transform.position;
+                    fishCat.transform.position += vectorIncremet; 
                     fishCat.name = "Fish_Cat_0" + i;
                 }
                 else
                 {
-                    vectorSpawnPoint *= i;
+                    SetAngleForFishCatSpawn();
                     GameObject fishPlayer = GameObject.Instantiate(fishCatPlayer);
-                    fishPlayer.transform.position = vectorSpawnPoint;
+                    fishPlayer.transform.position = firstCP.transform.position;
+                    fishPlayer.transform.position += vectorSpawnPoint;
                     fishPlayer.name = "Fish_Cat_Player";
                 }
             }
@@ -103,6 +106,8 @@ public class Node_Gen_Create : MonoBehaviour
                 }
             }
             vectorFrom0To1 = Vector3.zero;
+            vectorIncremet = Vector3.zero;
+            fishCatSpawnAngle = 0;
             hasStartBeenPressed = false;
             numberOfNodes = 0;
             isReadyToDrawTrack = false;
@@ -113,7 +118,7 @@ public class Node_Gen_Create : MonoBehaviour
 
         if (!hasStartBeenPressed)   // No longer accepts RMB input once the race starts
         {
-            if (Input.GetMouseButtonDown(1)) // RMB
+            if (Input.GetMouseButtonDown(1)) // RMB - To place the nodes for the track
             {
                 GameObject nodeInstance = GameObject.Instantiate(node);
                 nodeInstance.transform.position = new Vector3(mousePosInWorldCoords.x, mousePosInWorldCoords.y);
@@ -131,5 +136,14 @@ public class Node_Gen_Create : MonoBehaviour
                 track_LR.addNewNodeToList_trackTesting(nodeInstance);
             }
         }
+    }
+
+    // Turns the angle that the fishCats spawn at and also seems to help with grouping them near the first CP
+    void SetAngleForFishCatSpawn()
+    {
+        fishCatSpawnAngle += 90.0f;
+        vectorSpawnPoint = new Vector3(Mathf.Cos(fishCatSpawnAngle * Mathf.Deg2Rad), Mathf.Sin(fishCatSpawnAngle * Mathf.Deg2Rad));
+        vectorSpawnPoint.Normalize();
+        vectorSpawnPoint *= 0.5f;
     }
 }
