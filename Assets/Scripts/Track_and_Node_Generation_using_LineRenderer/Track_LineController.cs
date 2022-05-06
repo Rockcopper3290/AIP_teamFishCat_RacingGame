@@ -9,7 +9,7 @@ public class Track_LineController : MonoBehaviour
     private LineRenderer lr;
     private EdgeCollider2D ec2D;
     private Transform[] points;
-    public NodeGenCreate NodeGenCreate_Refence;
+    public Node_Gen_Create NodeGenCreate_Refence;
 
     private void Awake()
     {

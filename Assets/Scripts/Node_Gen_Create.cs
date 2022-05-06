@@ -2,15 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NodeGenCreate : MonoBehaviour
+public class Node_Gen_Create : MonoBehaviour
 {
     public Track_Testing track_LR;
     public GameObject lineRenderer;
 
     public GameObject node;
+    public GameObject fishCatPlayer;
     public GameObject fishCatAI;
 
+    Vector3 vectorFrom0To1;
+    Vector3 vectorSpawnPoint;
+
     public int numberOfNodes = 0;
+    public int numberOfFishCats = 5;
 
     public bool hasStartBeenPressed = false;
     public bool isReadyToDrawTrack = false;
@@ -42,12 +47,32 @@ public class NodeGenCreate : MonoBehaviour
                 if (nextNode == null) currentNode.GetComponent<Node_Checkpoint>().isNodeLastPlaced = true;
             }
 
-            // Creates a tester AI upon S being pressed {
-            GameObject fishCat = GameObject.Instantiate(fishCatAI);
-            GameObject startCP = GameObject.Find("Node_0");
-            fishCat.transform.position = startCP.GetComponent<Node_Checkpoint>().nodePosition;
-            fishCat.name = "Fish Cat 01";
-            // }
+            // Spawns the players car and a number of AI behind
+            GameObject firstCP = GameObject.Find("Node_0");
+            GameObject nextCP = GameObject.Find("Node_1");
+            vectorFrom0To1 = nextCP.transform.position - firstCP.transform.position;
+            vectorFrom0To1.Normalize();
+            vectorFrom0To1 *= -0.5f;
+            vectorSpawnPoint = firstCP.transform.position + vectorFrom0To1;
+
+            for (int i = 1; i < numberOfFishCats + 1; ++i)
+            {
+                if (i > 1)
+                {
+                    vectorSpawnPoint = vectorFrom0To1;
+                    vectorSpawnPoint *= i;
+                    GameObject fishCat = GameObject.Instantiate(fishCatAI);
+                    fishCat.transform.position = vectorSpawnPoint;
+                    fishCat.name = "Fish_Cat_0" + i;
+                }
+                else
+                {
+                    vectorSpawnPoint *= i;
+                    GameObject fishPlayer = GameObject.Instantiate(fishCatPlayer);
+                    fishPlayer.transform.position = vectorSpawnPoint;
+                    fishPlayer.name = "Fish_Cat_Player";
+                }
+            }
 
             track_LR.endOfTrackSelection();
             lineRenderer.GetComponent<LineRenderer>().startColor = Color.cyan;
@@ -66,8 +91,18 @@ public class NodeGenCreate : MonoBehaviour
                 Destroy(GameObject.Find("Node_" + x));
             }
 
-            Destroy(GameObject.Find("Fish Cat 01")); // DESTROYS the single AI fish cat upon C pressed
-
+            for (int x = 1; x < numberOfFishCats + 1; ++x) // Destroys all of the current fishCats on screen
+            {
+                if (x > 1)
+                {
+                    Destroy(GameObject.Find("Fish_Cat_0" + x));
+                }
+                else
+                {
+                    Destroy(GameObject.Find("Fish_Cat_Player"));
+                }
+            }
+            vectorFrom0To1 = Vector3.zero;
             hasStartBeenPressed = false;
             numberOfNodes = 0;
             isReadyToDrawTrack = false;
