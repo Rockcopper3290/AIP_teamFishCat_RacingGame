@@ -5,7 +5,7 @@ using UnityEngine;
 public class CheckPointFinder : MonoBehaviour
 {
 
-    public static Node_Gen_Create nodeGenCreate;
+    public static NodeGenCreate nodeGenCreate;
     public static Node_Checkpoint nodeCheckpoint; 
 
     public int totalNumCheckPoints; // how many check points in the scene 
