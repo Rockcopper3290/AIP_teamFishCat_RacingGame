@@ -14,14 +14,14 @@ public class FishCat_Player : MonoBehaviour
     public int nodeCounter = 1;
     public float playerTurnSpeed = 180.0f;
     public float playerSpeed = 1.0f;
-    float playerSpeedMax = 1.2f;
-    float playerspeedMin = 0.5f;
+    public float playerSpeedMax = 1.2f;
+    public float playerspeedMin = 0.5f;
     public float collisionTimer = 0.0f;
     bool colliding = false;
     bool onTrackSpeedBoost = false;
     bool inOilSpill = false;
-    public bool eatingCatFood = false;
-    public bool tacocat = false;
+    bool eatingCatFood = false;
+    bool tacocat = false;
 
     Rigidbody2D playerRigidBody;
     public GameObject nextCP;
@@ -30,9 +30,8 @@ public class FishCat_Player : MonoBehaviour
     void Awake()
     {
         playerRigidBody = GetComponent<Rigidbody2D>();
-        vectorLeftAngle = playerAngle + 90.0f;
 
-        AngleToVectorMovement();
+        AngleToVectorCalculations();
 
         nextCP = GameObject.Find("Node_" + nodeCounter);
     }
@@ -70,17 +69,20 @@ public class FishCat_Player : MonoBehaviour
         vectorToNextCP = nextCP.GetComponent<Node_Checkpoint>().nodePosition - transform.position;
         angleToNode = Vector3.Angle(vectorLeft, vectorToNextCP);
 
-        if (angleToNode <= 90)  // Turns left
+
+        if (angleToNode <= 89)  // Turns left
         {
             playerAngle += playerTurnSpeed * Time.deltaTime;
             vectorLeftAngle = playerAngle + 90.0f;
-            AngleToVectorMovement();
+
+            AngleToVectorCalculations();
         }
-        else if (angleToNode > 90)  // Turns right
+        else if (angleToNode > 91)  // Turns right
         {
             playerAngle -= playerTurnSpeed * Time.deltaTime;
             vectorLeftAngle = playerAngle + 90.0f;
-            AngleToVectorMovement();
+
+            AngleToVectorCalculations();
         }
 
         // Increments to the next CP upon getting close enough to the current CP
@@ -100,7 +102,8 @@ public class FishCat_Player : MonoBehaviour
 
     // Takes fishCatAngle and turns it into a vector/ velocity for movement
     // Calculates the players left into a vector
-    void AngleToVectorMovement()
+    // Calculates the vectors for raycast purposes
+    void AngleToVectorCalculations()
     {
         playerVelocity = new Vector3(Mathf.Cos(playerAngle * Mathf.Deg2Rad), Mathf.Sin(playerAngle * Mathf.Deg2Rad));
 
@@ -124,6 +127,7 @@ public class FishCat_Player : MonoBehaviour
         }
     }
 
+    // 
     void OnTriggerEnter2D(Collider2D other)
     {
         colliding = true;
@@ -145,6 +149,7 @@ public class FishCat_Player : MonoBehaviour
         }
     }
 
+    // 
     void OnTriggerExit2D(Collider2D other)
     {
         colliding = false;

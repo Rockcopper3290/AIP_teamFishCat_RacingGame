@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6968482047820718709}
   - component: {fileID: 7418430129396376187}
   - component: {fileID: 2695513544486462555}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TacocaT
   m_TagString: Tacocat
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 0, b: 0.5739832, a: 1}
   m_FlipX: 0

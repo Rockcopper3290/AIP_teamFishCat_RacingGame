@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -6133381487050723140}
   - component: {fileID: 8499023104791684887}
   - component: {fileID: 24186512880544599}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Oil_Spill
   m_TagString: Oil Spill
   m_Icon: {fileID: 0}
