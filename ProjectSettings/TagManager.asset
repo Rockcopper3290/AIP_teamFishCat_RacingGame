@@ -7,6 +7,7 @@ TagManager:
   - AI
   - Line (Track)
   - Obstacle
+  - Oil
   layers:
   - Default
   - TransparentFX
