@@ -418,75 +418,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &399510866
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2231906046198423061, guid: 2063091b4f3d8f94492347928f053138,
-        type: 3}
-      propertyPath: m_Name
-      value: Oil Puddle
-      objectReference: {fileID: 0}
-    - target: {fileID: 4208997174680751685, guid: 2063091b4f3d8f94492347928f053138,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4208997174680751685, guid: 2063091b4f3d8f94492347928f053138,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -2.44
-      objectReference: {fileID: 0}
-    - target: {fileID: 4208997174680751685, guid: 2063091b4f3d8f94492347928f053138,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.41
-      objectReference: {fileID: 0}
-    - target: {fileID: 4208997174680751685, guid: 2063091b4f3d8f94492347928f053138,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4208997174680751685, guid: 2063091b4f3d8f94492347928f053138,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4208997174680751685, guid: 2063091b4f3d8f94492347928f053138,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4208997174680751685, guid: 2063091b4f3d8f94492347928f053138,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4208997174680751685, guid: 2063091b4f3d8f94492347928f053138,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4208997174680751685, guid: 2063091b4f3d8f94492347928f053138,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4208997174680751685, guid: 2063091b4f3d8f94492347928f053138,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4208997174680751685, guid: 2063091b4f3d8f94492347928f053138,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2063091b4f3d8f94492347928f053138, type: 3}
 --- !u!1 &1544874304
 GameObject:
   m_ObjectHideFlags: 0
@@ -533,10 +464,8 @@ MonoBehaviour:
   track_LR: {fileID: 10054442}
   lineRenderer: {fileID: 194559929}
   node: {fileID: 5724619450357287062, guid: 846db6530a417204a86ec2a4ea0a2e3e, type: 3}
-  fishCatPlayer: {fileID: 2360513266224828108, guid: 7dc8882643782c146844eb2d2ba54c59,
-    type: 3}
-  fishCatAI: {fileID: 5765837744187982726, guid: ba995a194fbc3484f9fc243df120a7ed,
-    type: 3}
+  fishCatPlayer: {fileID: 2360513266224828108, guid: 7dc8882643782c146844eb2d2ba54c59, type: 3}
+  fishCatAI: {fileID: 5765837744187982726, guid: ba995a194fbc3484f9fc243df120a7ed, type: 3}
   oilSpill: {fileID: 24186512880544598, guid: f2d8e5352f4ffd440a0cf054b3e8f693, type: 3}
   catFood: {fileID: 4710540886285744391, guid: cfe4bfb824d6abe40a629139841109e8, type: 3}
   tacocat: {fileID: 8700486880144356432, guid: 9cfbf9a521c09574e884e7c03618509b, type: 3}
