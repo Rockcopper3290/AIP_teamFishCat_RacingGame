@@ -10,6 +10,9 @@ public class Node_Gen_Create : MonoBehaviour
     public GameObject node;
     public GameObject fishCatPlayer;
     public GameObject fishCatAI;
+    public GameObject oilSpill;
+    public GameObject catFood;
+    public GameObject tacocat;
 
     Vector3 vectorFrom0To1;
     Vector3 vectorSpawnPoint;
@@ -18,6 +21,9 @@ public class Node_Gen_Create : MonoBehaviour
     float fishCatSpawnAngle;
     public int numberOfNodes = 0;
     public int numberOfFishCats = 1;
+    public int numberOfOilSpills = 5;
+    public int numberOfCatFood = 4;
+    public int numberOfTacocat = 3;
 
     public bool hasStartBeenPressed = false;
     public bool isReadyToDrawTrack = false;
@@ -27,6 +33,8 @@ public class Node_Gen_Create : MonoBehaviour
     {
         lineRenderer.GetComponent<LineRenderer>().startColor = Color.clear;
         lineRenderer.GetComponent<LineRenderer>().endColor = Color.clear;
+
+        RandomlySpawnObstacles();
     }
 
     // Update is called once per frame
@@ -112,6 +120,9 @@ public class Node_Gen_Create : MonoBehaviour
             numberOfNodes = 0;
             isReadyToDrawTrack = false;
 
+            DestroySpawnedObstacles();
+            RandomlySpawnObstacles();
+
             lineRenderer.GetComponent<LineRenderer>().startColor = Color.clear;
             lineRenderer.GetComponent<LineRenderer>().endColor = Color.clear;
         }
@@ -145,5 +156,57 @@ public class Node_Gen_Create : MonoBehaviour
         vectorSpawnPoint = new Vector3(Mathf.Cos(fishCatSpawnAngle * Mathf.Deg2Rad), Mathf.Sin(fishCatSpawnAngle * Mathf.Deg2Rad));
         vectorSpawnPoint.Normalize();
         vectorSpawnPoint *= 0.5f;
+    }
+
+    // Randomly spawns the 3 different obstacles
+    void RandomlySpawnObstacles()
+    {
+        // oil spills
+        for (int i = 0; i < numberOfOilSpills; ++i)
+        {
+            GameObject obstOil = GameObject.Instantiate(oilSpill);
+            obstOil.transform.position = new Vector3(0, 0, 0);
+            obstOil.transform.position += new Vector3(Random.Range(-7, 7), 0, 0);
+            obstOil.transform.position += new Vector3(0, Random.Range(-7, 7), 0);
+            obstOil.name = "Oil_Spill_0" + i;
+        }
+        // cat food
+        for (int i = 0; i < numberOfCatFood; ++i)
+        {
+            GameObject obstCatFood = GameObject.Instantiate(catFood);
+            obstCatFood.transform.position = new Vector3(0, 0, 0);
+            obstCatFood.transform.position += new Vector3(Random.Range(-7, 7), 0, 0);
+            obstCatFood.transform.position += new Vector3(0, Random.Range(-7, 7), 0);
+            obstCatFood.name = "Cat_Food_0" + i;
+        }
+        // tacocat
+        for (int i = 0; i < numberOfTacocat; ++i)
+        {
+            GameObject obstTacocat = GameObject.Instantiate(tacocat);
+            obstTacocat.transform.position = new Vector3(0, 0, 0);
+            obstTacocat.transform.position += new Vector3(Random.Range(-7, 7), 0, 0);
+            obstTacocat.transform.position += new Vector3(0, Random.Range(-7, 7), 0);
+            obstTacocat.name = "Tacocat_0" + i;
+        }
+    }
+
+    // Destroy randomly spawned obstacles
+    void DestroySpawnedObstacles()
+    {
+        // oil spills
+        for (int i = 0; i < numberOfOilSpills; ++i)
+        {
+            Destroy(GameObject.Find("Oil_Spill_0" + i));
+        }
+        // cat food
+        for (int i = 0; i < numberOfOilSpills; ++i)
+        {
+            Destroy(GameObject.Find("Cat_Food_0" + i));
+        }
+        // tacocat
+        for (int i = 0; i < numberOfOilSpills; ++i)
+        {
+            Destroy(GameObject.Find("Tacocat_0" + i));
+        }
     }
 }
