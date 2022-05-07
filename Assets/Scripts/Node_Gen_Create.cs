@@ -21,9 +21,9 @@ public class Node_Gen_Create : MonoBehaviour
     float fishCatSpawnAngle;
     public int numberOfNodes = 0;
     public int numberOfFishCats = 1;
-    public int numberOfOilSpills = 3;
-    public int numberOfCatFood = 2;
-    public int numberOfTacocat = 2;
+    public int numberOfOilSpills = 5;
+    public int numberOfCatFood = 4;
+    public int numberOfTacocat = 3;
 
     public bool hasStartBeenPressed = false;
     public bool isReadyToDrawTrack = false;
