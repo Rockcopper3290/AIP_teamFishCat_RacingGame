@@ -17,11 +17,11 @@ public class FishCat_Player : MonoBehaviour
     public float playerSpeedMax = 1.2f;
     public float playerspeedMin = 0.5f;
     public float collisionTimer = 0.0f;
-    bool colliding = false;
+    public bool colliding = false;
     bool onTrackSpeedBoost = false;
     bool inOilSpill = false;
-    bool eatingCatFood = false;
-    bool tacocat = false;
+    public bool eatingCatFood = false;
+    public bool tacocat = false;
 
     Rigidbody2D playerRigidBody;
     public GameObject nextCP;
