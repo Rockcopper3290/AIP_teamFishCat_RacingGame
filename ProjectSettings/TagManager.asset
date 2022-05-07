@@ -7,12 +7,15 @@ TagManager:
   - AI
   - Line (Track)
   - Obstacle
+  - Oil Spill
+  - Cat Food
+  - Tacocat
   - Oil
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Obstacles
   - Water
   - UI
   - Node

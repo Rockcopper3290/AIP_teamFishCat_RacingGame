@@ -13,7 +13,14 @@ public class FishCat_AI : MonoBehaviour
     float angleToNode = 0.0f;
     public int nodeCounter = 1;
     public float fishCatTurnSpeed = 180.0f;
-    public float fishCatSpeed = 1.0f;
+    float fishCatSpeed = 0.9f;
+    public float fishCatBaseSpeed = 0.9f;
+    public float collisionTimer = 0.0f;
+    bool colliding = false;
+    bool onTrackSpeedBoost = false;
+    bool inOilSpill = false;
+    bool eatingCatFood = false;
+    bool tacocat = false;
 
     Rigidbody2D playerRigidBody;
     public GameObject nextCP;
@@ -32,7 +39,16 @@ public class FishCat_AI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        vectorToNextCP = nextCP.GetComponent<Node_Checkpoint>().nodePosition - transform.position;
+        if (!colliding && collisionTimer <= 0)
+        {
+            fishCatSpeed = fishCatBaseSpeed; 
+            eatingCatFood = false;
+            tacocat = false;
+        }
+        else if (colliding || collisionTimer > 0)  // Only when colliding with SOMETHING will these checks be done
+        {
+            CollisionHandling();
+        }
 
         fishCatVelocity.Normalize();
         fishCatVelocity *= fishCatSpeed;
@@ -40,6 +56,7 @@ public class FishCat_AI : MonoBehaviour
         playerRigidBody.rotation = fishCatAngle;
 
         // Calculates whether to turn left or right
+        vectorToNextCP = nextCP.GetComponent<Node_Checkpoint>().nodePosition - transform.position;
         angleToNode = Vector3.Angle(fishCatLeft, vectorToNextCP);
 
         if (angleToNode <= 90)  // Turns left
@@ -71,11 +88,61 @@ public class FishCat_AI : MonoBehaviour
 
     // Takes fishCatAngle and turns it into a vector/ velocity for movement
     // Calculates the players left into a vector
-    // Keeps fishCatAngle and fishCatLeft between 0-360
     void AngleToVectorMovement()
     {
         fishCatVelocity = new Vector3(Mathf.Cos(fishCatAngle * Mathf.Deg2Rad), Mathf.Sin(fishCatAngle * Mathf.Deg2Rad));
 
         fishCatLeft = new Vector3(Mathf.Cos(vectorLeftAngle * Mathf.Deg2Rad), Mathf.Sin(vectorLeftAngle * Mathf.Deg2Rad));
+    }
+
+    // Different checks and outcomes regarding what is being touched
+    void CollisionHandling()
+    {
+        if (onTrackSpeedBoost) fishCatSpeed = 1.5f;
+        if (inOilSpill) fishCatSpeed = 0.2f;
+        if (eatingCatFood && collisionTimer > 0)
+        {
+            collisionTimer -= Time.deltaTime;
+            fishCatSpeed = 0.0f;
+        }
+        if (tacocat && collisionTimer > 0)
+        {
+            collisionTimer -= Time.deltaTime;
+            fishCatSpeed = fishCatBaseSpeed * -1.0f;
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        colliding = true;
+
+        if (other.gameObject.tag == "Line (Track)") onTrackSpeedBoost = true;
+
+        if (other.gameObject.tag == "Oil Spill") inOilSpill = true;
+
+        if (other.gameObject.tag == "Cat Food")
+        {
+            collisionTimer = 5;
+            eatingCatFood = true;
+        }
+
+        if (other.gameObject.tag == "Tacocat")
+        {
+            collisionTimer = 2;
+            tacocat = true;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        colliding = false;
+
+        if (other.gameObject.tag == "Line (Track)") onTrackSpeedBoost = false;
+
+        if (other.gameObject.tag == "Oil Spill") inOilSpill = false;
+
+        // eatingCatFood = false done elsewhere
+
+        // tacocat = false done elsewhere
     }
 }
