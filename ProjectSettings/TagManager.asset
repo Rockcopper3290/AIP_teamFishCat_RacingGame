@@ -3,8 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Oil
+  tags: [AI, Line (Track), Obstacle, Oil]
   layers:
   - Default
   - TransparentFX
@@ -41,4 +40,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Below
+    uniqueID: 385079135
     locked: 0
