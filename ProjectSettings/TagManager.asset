@@ -7,6 +7,9 @@ TagManager:
   - AI
   - Line (Track)
   - Obstacle
+  - Oil Spill
+  - Cat Food
+  - Tacocat
   layers:
   - Default
   - TransparentFX

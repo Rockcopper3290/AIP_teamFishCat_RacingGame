@@ -14,7 +14,14 @@ public class FishCat_Player : MonoBehaviour
     public int nodeCounter = 1;
     public float playerTurnSpeed = 180.0f;
     public float playerSpeed = 1.0f;
+    float playerSpeedMax = 1.2f;
+    float playerspeedMin = 0.5f;
+    public float collisionTimer = 0.0f;
+    bool colliding = false;
     bool onTrackSpeedBoost = false;
+    bool inOilSpill = false;
+    bool eatingCatFood = false;
+    bool tacocat = false;
 
     Rigidbody2D playerRigidBody;
     public GameObject nextCP;
@@ -33,16 +40,32 @@ public class FishCat_Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (playerSpeed < playerspeedMin && collisionTimer <= 0) playerSpeed += 0.01f;
+
         if (!Input.GetMouseButton(0))    // LMB released
         {
-            if (playerSpeed > 0.5f) playerSpeed -= 0.01f;
+            if (playerSpeed > playerspeedMin) playerSpeed -= 0.01f;
         }
-        else if (Input.GetMouseButton(0))    // LMB held down
+        else if (Input.GetMouseButton(0) && !colliding)    // LMB held down and not colliding with anything
         {
-            if (playerSpeed < 1.2f) playerSpeed += 0.01f;
+            if (playerSpeed < playerSpeedMax) playerSpeed += 0.01f;
         }
 
-        if (onTrackSpeedBoost) playerSpeed = 1.5f;
+        if (colliding || collisionTimer > 0)  // Only when colliding with SOMETHING will these checks be done
+        {
+            if (onTrackSpeedBoost) playerSpeed = 1.5f;
+            if (inOilSpill) playerSpeed = 0.2f;
+            if (eatingCatFood && collisionTimer > 0)
+            {
+                collisionTimer -= Time.deltaTime;
+                playerSpeed = 0.0f;
+            }
+            if (tacocat && collisionTimer > 0)
+            {
+                collisionTimer -= Time.deltaTime;
+                playerSpeed = playerSpeedMax * -1.0f;
+            }
+        }
 
         playerVelocity.Normalize();
         playerVelocity *= playerSpeed;
@@ -93,11 +116,35 @@ public class FishCat_Player : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        onTrackSpeedBoost = true;
+        colliding = true;
+
+        if (other.gameObject.tag == "Line (Track)") onTrackSpeedBoost = true;
+
+        if (other.gameObject.tag == "Oil Spill") inOilSpill = true;
+
+        if (other.gameObject.tag == "Cat Food")
+        {
+            collisionTimer = 5;
+            eatingCatFood = true;
+        }
+
+        if (other.gameObject.tag == "Tacocat")
+        {
+            collisionTimer = 2;
+            tacocat = true;
+        }
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
-        onTrackSpeedBoost = false;
+        colliding = false;
+
+        if (other.gameObject.tag == "Line (Track)") onTrackSpeedBoost = false;
+
+        if (other.gameObject.tag == "Oil Spill") inOilSpill = false;
+
+        if (other.gameObject.tag == "Cat Food" && collisionTimer <= 0) eatingCatFood = false;
+
+        if (other.gameObject.tag == "Tacocat" && collisionTimer <= 0) tacocat = false;
     }
 }
