@@ -209,4 +209,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a756f5b232694ac49a7b3b5fb4a3b629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishCatPlayer: {fileID: 1596874732892773445}
