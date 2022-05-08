@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 24186512880544596}
   - component: {fileID: -6133381487050723140}
   - component: {fileID: 7472163785719767736}
-  - component: {fileID: 24186512880544599}
   m_Layer: 3
   m_Name: Oil_Spill
   m_TagString: Oil Spill
@@ -75,12 +74,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 894f3b1b661d29043b60333fed6ff8bf, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e22051021cbf56c46a777a7247fec5c7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.28, y: 1.28}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -125,7 +124,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1.28, y: 1.28}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 1.28, y: 1.28}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -133,15 +132,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.0135899, y: 0.9631883}
   m_EdgeRadius: 0
---- !u!114 &24186512880544599
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 24186512880544598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e293a8654692824d8784882b86e0bca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
