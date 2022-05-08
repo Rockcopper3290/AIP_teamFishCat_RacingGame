@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class FishCat_Player : MonoBehaviour
 {
     public Vector3 playerVelocity;
@@ -25,7 +26,7 @@ public class FishCat_Player : MonoBehaviour
 
     Rigidbody2D playerRigidBody;
     public GameObject nextCP;
-
+    
     // Update is called on the first frame after instantiated
     void Awake()
     {

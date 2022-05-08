@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Node_Gen_Create : MonoBehaviour
 {
@@ -40,6 +41,8 @@ public class Node_Gen_Create : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape)) SceneManager.LoadScene(0);
+
         // mouse stuff from screen to game world
         Vector2 mousePosInScreenCoords = Input.mousePosition;
         Vector3 mousePosInWorldCoords = Camera.main.ScreenToWorldPoint(mousePosInScreenCoords);
