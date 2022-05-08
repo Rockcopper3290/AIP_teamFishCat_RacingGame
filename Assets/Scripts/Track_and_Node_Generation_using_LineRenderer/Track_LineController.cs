@@ -40,7 +40,7 @@ public class Track_LineController : MonoBehaviour
     {
         List<Vector2> edges = new List<Vector2>();
 
-        for (int point = 0; point<lineRenderer.positionCount; ++point)
+        for (int point = 0; point < lineRenderer.positionCount; ++point)
         {
             Vector3 lineRendererPoint = lineRenderer.GetPosition(point);
             edges.Add(new Vector2(lineRendererPoint.x, lineRendererPoint.y));

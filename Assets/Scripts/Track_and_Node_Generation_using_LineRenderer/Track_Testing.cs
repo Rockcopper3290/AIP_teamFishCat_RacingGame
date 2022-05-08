@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Track_Testing : MonoBehaviour
 {
-    [SerializeField] public List <Transform> points;
+    [SerializeField] public List<Transform> points;
     [SerializeField] private Track_LineController line;
     private Transform[] pointsInAnArray;
 
@@ -24,7 +24,7 @@ public class Track_Testing : MonoBehaviour
     public void clearTrackList()
     {
         points.Clear();
-       
+
 
     }
 

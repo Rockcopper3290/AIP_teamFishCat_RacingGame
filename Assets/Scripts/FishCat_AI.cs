@@ -41,7 +41,7 @@ public class FishCat_AI : MonoBehaviour
     {
         if (!colliding && collisionTimer <= 0)
         {
-            fishCatSpeed = fishCatBaseSpeed; 
+            fishCatSpeed = fishCatBaseSpeed;
             eatingCatFood = false;
             tacocat = false;
         }

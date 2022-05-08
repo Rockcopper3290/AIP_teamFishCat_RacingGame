@@ -70,16 +70,4 @@ public class Track_Drawing : MonoBehaviour
         
 
     }
-
-    //TODO: 
-    /*
-     * 1) get 2 nodes from the list starting at the begining
-     * 2) Find how far away node_1 is from node_2
-     * 3) Find the angle of node_2 from node_1
-     * 4) Instantiate a track prefap in the middle between node_1 & node_2
-     * 5) rotate the prefab in the z axis to be inline with the 2 nodes
-     * 6) scale the prefab in the x axis to strech out to meet with the center of both prefabs
-     * 
-     * 7) repeat for each node
-     */
 }

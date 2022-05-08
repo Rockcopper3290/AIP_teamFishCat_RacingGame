@@ -470,7 +470,7 @@ MonoBehaviour:
   catFood: {fileID: 4710540886285744391, guid: cfe4bfb824d6abe40a629139841109e8, type: 3}
   tacocat: {fileID: 8700486880144356432, guid: 9cfbf9a521c09574e884e7c03618509b, type: 3}
   numberOfNodes: 0
-  numberOfFishCats: 1
+  numberOfFishCats: 5
   numberOfOilSpills: 5
   numberOfCatFood: 4
   numberOfTacocat: 3

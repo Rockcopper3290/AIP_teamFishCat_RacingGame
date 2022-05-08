@@ -146,7 +146,7 @@ public class FishCat_Player : MonoBehaviour
         {
             collisionTimer = 2;
             tacocat = true;
-            if(collisionTimer >= 1.9f) playerAngle += 180;
+            if (collisionTimer >= 1.9f) playerAngle += 180;
         }
     }
 

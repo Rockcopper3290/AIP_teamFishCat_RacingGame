@@ -72,7 +72,7 @@ public class Node_Gen_Create : MonoBehaviour
                     vectorIncremet = vectorIncremet + vectorSpawnPoint;
                     GameObject fishCat = GameObject.Instantiate(fishCatAI);
                     fishCat.transform.position = firstCP.transform.position;
-                    fishCat.transform.position += vectorIncremet; 
+                    fishCat.transform.position += vectorIncremet;
                     fishCat.name = "Fish_Cat_0" + i;
                 }
                 else
