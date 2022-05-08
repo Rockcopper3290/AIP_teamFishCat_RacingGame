@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FishCat_Player : MonoBehaviour
 {
-    Vector3 playerVelocity;
+    public Vector3 playerVelocity;
     Vector3 vectorLeft;
     Vector3 vectorToNextCP;
 
@@ -17,11 +17,11 @@ public class FishCat_Player : MonoBehaviour
     public float playerSpeedMax = 1.2f;
     public float playerspeedMin = 0.5f;
     public float collisionTimer = 0.0f;
-    bool colliding = false;
-    bool onTrackSpeedBoost = false;
-    bool inOilSpill = false;
-    bool eatingCatFood = false;
-    bool tacocat = false;
+    public bool colliding = false;
+    public bool onTrackSpeedBoost = false;
+    public bool inOilSpill = false;
+    public bool eatingCatFood = false;
+    public bool tacocat = false;
 
     Rigidbody2D playerRigidBody;
     public GameObject nextCP;
@@ -60,6 +60,7 @@ public class FishCat_Player : MonoBehaviour
             tacocat = false;
         }
 
+        if (playerVelocity == Vector3.zero && collisionTimer <= 0) AngleToVectorCalculations();
         playerVelocity.Normalize();
         playerVelocity *= playerSpeed;
         playerRigidBody.AddForce(playerVelocity, ForceMode2D.Force);
@@ -123,7 +124,6 @@ public class FishCat_Player : MonoBehaviour
         if (tacocat && collisionTimer > 0)
         {
             collisionTimer -= Time.deltaTime;
-            playerSpeed = playerSpeedMax * -1.0f;
         }
     }
 
@@ -146,6 +146,7 @@ public class FishCat_Player : MonoBehaviour
         {
             collisionTimer = 2;
             tacocat = true;
+            if(collisionTimer >= 1.9f) playerAngle += 180;
         }
     }
 
