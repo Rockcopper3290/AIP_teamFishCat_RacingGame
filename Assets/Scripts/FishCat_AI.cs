@@ -31,7 +31,7 @@ public class FishCat_AI : MonoBehaviour
         playerRigidBody = GetComponent<Rigidbody2D>();
         vectorLeftAngle = fishCatAngle + 90.0f;
 
-        AngleToVectorMovement();
+        AngleToVectorCalculations();
 
         nextCP = GameObject.Find("Node_" + nodeCounter);
     }
@@ -50,6 +50,7 @@ public class FishCat_AI : MonoBehaviour
             CollisionHandling();
         }
 
+        if (fishCatVelocity == Vector3.zero && collisionTimer <= 0) AngleToVectorCalculations();
         fishCatVelocity.Normalize();
         fishCatVelocity *= fishCatSpeed;
         playerRigidBody.AddForce(fishCatVelocity, ForceMode2D.Force);
@@ -59,17 +60,17 @@ public class FishCat_AI : MonoBehaviour
         vectorToNextCP = nextCP.GetComponent<Node_Checkpoint>().nodePosition - transform.position;
         angleToNode = Vector3.Angle(fishCatLeft, vectorToNextCP);
 
-        if (angleToNode <= 90)  // Turns left
+        if (angleToNode < 90)  // Turns left
         {
             fishCatAngle += fishCatTurnSpeed * Time.deltaTime;
             vectorLeftAngle = fishCatAngle + 90.0f;
-            AngleToVectorMovement();
+            AngleToVectorCalculations();
         }
         else if (angleToNode > 90)  // Turns right
         {
             fishCatAngle -= fishCatTurnSpeed * Time.deltaTime;
             vectorLeftAngle = fishCatAngle + 90.0f;
-            AngleToVectorMovement();
+            AngleToVectorCalculations();
         }
 
         // Increments to the next CP upon getting close enough to the current CP
@@ -88,7 +89,7 @@ public class FishCat_AI : MonoBehaviour
 
     // Takes fishCatAngle and turns it into a vector/ velocity for movement
     // Calculates the players left into a vector
-    void AngleToVectorMovement()
+    void AngleToVectorCalculations()
     {
         fishCatVelocity = new Vector3(Mathf.Cos(fishCatAngle * Mathf.Deg2Rad), Mathf.Sin(fishCatAngle * Mathf.Deg2Rad));
 
@@ -108,7 +109,6 @@ public class FishCat_AI : MonoBehaviour
         if (tacocat && collisionTimer > 0)
         {
             collisionTimer -= Time.deltaTime;
-            fishCatSpeed = fishCatBaseSpeed * -1.0f;
         }
     }
 
@@ -130,6 +130,7 @@ public class FishCat_AI : MonoBehaviour
         {
             collisionTimer = 2;
             tacocat = true;
+            if (collisionTimer >= 1.9f) fishCatAngle += 180;
         }
     }
 

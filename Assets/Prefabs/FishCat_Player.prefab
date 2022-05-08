@@ -192,10 +192,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c760ede9e97cb914c93fb1c935fc3678, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerVelocity: {x: 0, y: 0, z: 0}
   nodeCounter: 1
   playerTurnSpeed: 180
   playerSpeed: 0.8
   playerSpeedMax: 1.2
   playerspeedMin: 0.5
   collisionTimer: 0
+  colliding: 0
+  onTrackSpeedBoost: 0
+  inOilSpill: 0
+  eatingCatFood: 0
+  tacocat: 0
   nextCP: {fileID: 0}

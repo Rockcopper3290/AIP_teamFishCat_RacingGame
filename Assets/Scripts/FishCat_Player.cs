@@ -71,14 +71,14 @@ public class FishCat_Player : MonoBehaviour
         angleToNode = Vector3.Angle(vectorLeft, vectorToNextCP);
 
 
-        if (angleToNode <= 89)  // Turns left
+        if (angleToNode < 90)  // Turns left
         {
             playerAngle += playerTurnSpeed * Time.deltaTime;
             vectorLeftAngle = playerAngle + 90.0f;
 
             AngleToVectorCalculations();
         }
-        else if (angleToNode > 91)  // Turns right
+        else if (angleToNode > 90)  // Turns right
         {
             playerAngle -= playerTurnSpeed * Time.deltaTime;
             vectorLeftAngle = playerAngle + 90.0f;
